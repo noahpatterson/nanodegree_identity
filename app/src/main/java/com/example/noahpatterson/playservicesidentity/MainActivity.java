@@ -19,10 +19,14 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, ResultCallback<People.LoadPeopleResult>
+{
 
     private static final String TAG = "main_activity";
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_USES_CREDENTIALS = 1;
@@ -63,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         return new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .addApi(Plus.API, Plus.PlusOptions.builder().build())
-                .addScope(new Scope(Scopes.PROFILE))
+                .addApi(Plus.API)
+                .addScope(new Scope(Scopes.PLUS_LOGIN))
+                .addScope(new Scope(Scopes.PLUS_ME))
                 .build();
     }
 
@@ -91,7 +96,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         signInProgress = STATE_SIGNED_IN;
 
-        String userName = Plus.PeopleApi.getCurrentPerson(googleApiClient).getDisplayName();
+        Plus.PeopleApi.loadVisible(googleApiClient, null).setResultCallback(this);
+        Person currentUser = Plus.PeopleApi.getCurrentPerson(googleApiClient);
+        String userName = "unknown user";
+        if (currentUser != null) {
+            userName = currentUser.getDisplayName();
+        }
         signInStatusTextView.setText("Signed in as: " + userName);
     }
 
@@ -239,5 +249,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+    @Override
+    public void onResult(People.LoadPeopleResult loadPeopleResult) {
+
     }
 }

@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "playservices-identity-test",
+    "project_number": "99843510539",
+    "name": "playServices-identity-test"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99843510539:android:2274c64a02bdd594",
+        "client_id": "android:com.example.noahpatterson.playservicesidentity",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.example.noahpatterson.playservicesidentity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99843510539-qolrr1e7an84266av72heq8t5iju38ir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.noahpatterson.playservicesidentity",
+            "certificate_hash": "EF97BAE5DAF82098957715A4A70E9911671FC394"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
