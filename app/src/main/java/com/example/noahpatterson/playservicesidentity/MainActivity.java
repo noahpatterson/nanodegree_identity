@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         signInProgress = STATE_SIGNED_IN;
 
-        Plus.PeopleApi.loadVisible(googleApiClient, null).setResultCallback(this);
+//        Plus.PeopleApi.loadVisible(googleApiClient, null).setResultCallback(this);
         Person currentUser = Plus.PeopleApi.getCurrentPerson(googleApiClient);
         String userName = "unknown user";
         if (currentUser != null) {
